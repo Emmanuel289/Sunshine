@@ -1,5 +1,6 @@
 package com.example.emmanuel.sunshine.app;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -15,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -101,18 +101,19 @@ public class ForecastFragment extends Fragment {
         ListView listView = (ListView) rootView.findViewById(R.id.list_view_forecast);
         listView.setAdapter(mForecastAdapter);
 
-        //Add an listener callback so that the a detail view is displayed when an item in the listview is clicked
+        /**
+        Add a listener callback to display the detailActivity when an item in the listview is clicked
+         **/
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /**
-                display a toast that contains the weather info
-                 **/
-                String forecast = mForecastAdapter.getItem(position); // get the forecast by calling getitem form the forecast adapter
-                Toast.makeText(getActivity(),forecast,Toast.LENGTH_SHORT).show(); // show toast
-
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                 String forecast = mForecastAdapter.getItem(position); // obtain the forecast data from the current list item
+                  Intent intent = new Intent(getActivity(), DetailActivity.class) //start an explicit intent to the DetailActivity class
+                 .putExtra(Intent.EXTRA_TEXT, forecast);
+                 startActivity(intent);
             }
         });
+
 
 
         return rootView;
