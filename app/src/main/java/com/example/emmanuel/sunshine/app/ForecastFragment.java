@@ -12,8 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -98,6 +100,19 @@ public class ForecastFragment extends Fragment {
         //Get a reference to the Listview and attach the adapter to it.
         ListView listView = (ListView) rootView.findViewById(R.id.list_view_forecast);
         listView.setAdapter(mForecastAdapter);
+
+        //Add an listener callback so that the a detail view is displayed when an item in the listview is clicked
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                /**
+                display a toast that contains the weather info
+                 **/
+                String forecast = mForecastAdapter.getItem(position); // get the forecast by calling getitem form the forecast adapter
+                Toast.makeText(getActivity(),forecast,Toast.LENGTH_SHORT).show(); // show toast
+
+            }
+        });
 
 
         return rootView;
