@@ -13,6 +13,9 @@ import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity {
 
+    private final String LOG_TAG = MainActivity.class.getSimpleName();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +57,7 @@ public class MainActivity extends ActionBarActivity {
          **/
         SharedPreferences sharedPrefs =
                 PreferenceManager.getDefaultSharedPreferences(this);
+
                 String location = sharedPrefs.getString(
                 getString(R.string.pref_location_key),
                 getString(R.string.pref_location_default));
@@ -75,7 +79,7 @@ public class MainActivity extends ActionBarActivity {
              }
 }
 
-    }
 
-    }
+
+
 
